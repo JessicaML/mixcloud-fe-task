@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from './fetchData';
 import styled from "styled-components";
+import Notification from "./Notification";
+
 import "./App.css";
 
 const Container = styled.div`
@@ -24,7 +26,10 @@ function App() {
       <h1> Hello World! </h1>
       {console.log(data)}
       {console.log(error)}
-
+      {data && data.data.map((follower) =>
+      <Notification 
+        follower={follower}
+      />)}
     </Container>
   );
 }
