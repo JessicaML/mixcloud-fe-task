@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from './fetchData';
 import styled from "styled-components";
-import Notification from "./Notification";
+import NotificationContainer from "./NotificationContainer";
 
 import "./App.css";
 
@@ -24,12 +24,11 @@ function App() {
   return (
     <Container>
       <h1> Hello World! </h1>
-      {console.log(data)}
-      {console.log(error)}
-      {data && data.data.map((follower) =>
-      <Notification 
-        follower={follower}
-      />)}
+      {data && 
+      <NotificationContainer 
+        data={data}
+      />}
+      {error && console.log(error)}
     </Container>
   );
 }
