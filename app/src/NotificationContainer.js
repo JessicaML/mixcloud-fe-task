@@ -17,8 +17,6 @@ function NotificationContainer({ data }) {
   useEffect(() => {
     setActiveNotifs(data.data.slice(0, 3))
     setWaitingNotifs(data.data.slice(3))
-    console.log('useEffect', waitingNotifs)
-
   },[data.data]);
 
 
@@ -26,22 +24,16 @@ function NotificationContainer({ data }) {
     const list = activeNotifs.filter(notif => notif.key !== follower.key)
     console.log('waitingNotifs', waitingNotifs)
 
-    if (activeNotifs.length > 0) {
+    if (waitingNotifs.length > 0) {
       list.push(waitingNotifs[0])
-      waitingNotifs.push(waitingNotifs[0])
       const waiting = waitingNotifs
+      console.log('waiting', waiting)
       waiting.shift()
       console.log('waiting', waiting)
-
       setWaitingNotifs(waiting)  
-      console.log('waitingNotifs', waitingNotifs)
-
     }
 
     setActiveNotifs(list);
-    console.log('waitingNotifs', waitingNotifs)
-    console.log('activeNotifs', activeNotifs)
-
   }
 
   return (
