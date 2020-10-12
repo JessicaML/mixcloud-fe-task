@@ -30,6 +30,7 @@ function App() {
         data={data}
       />}
       {error && console.log(error)}
+      {console.log(data)}
     </Container>
   );
 }

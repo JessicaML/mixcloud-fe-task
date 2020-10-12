@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Notification from "./Notification";
 
@@ -11,13 +11,46 @@ const Container = styled.div`
 `;
 
 function NotificationContainer({ data }) {
+  const [activeNotifs, setActiveNotifs] = useState([]);
+  const [waitingNotifs, setWaitingNotifs] = useState([]);
+
+  useEffect(() => {
+    setActiveNotifs(data.data.slice(0, 3))
+    setWaitingNotifs(data.data.slice(3))
+    console.log('useEffect', waitingNotifs)
+
+  },[data.data]);
+
+
+  const onClick = (follower) => {
+    const list = activeNotifs.filter(notif => notif.key !== follower.key)
+    console.log('waitingNotifs', waitingNotifs)
+
+    if (activeNotifs.length > 0) {
+      list.push(waitingNotifs[0])
+      waitingNotifs.push(waitingNotifs[0])
+      const waiting = waitingNotifs
+      waiting.shift()
+      console.log('waiting', waiting)
+
+      setWaitingNotifs(waiting)  
+      console.log('waitingNotifs', waitingNotifs)
+
+    }
+
+    setActiveNotifs(list);
+    console.log('waitingNotifs', waitingNotifs)
+    console.log('activeNotifs', activeNotifs)
+
+  }
 
   return (
     <Container>
-      {data.data.map((follower) =>
+      {activeNotifs.map((follower) =>
       <Notification 
         key={follower.key}
         follower={follower}
+        onClick={onClick}
       />)}
     </Container>
   );

@@ -52,16 +52,17 @@ const Text = styled.div`
 `;
 
 
-function Notification({ follower }) {
+function Notification({ follower, onClick }) {
   return (
-    <Container>
+    <Container className="fade-in">
         <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
         <TextWrapper>
           <Name>{follower.name}</Name>
           <Text>is following you</Text>
         </TextWrapper>
         <Logo src={live} alt={live}/>
-        <Close src={close} alt={close}/>
+        <Close src={close} alt={close} onClick={() => onClick(follower)} />
+
     </Container>
   );
 }
