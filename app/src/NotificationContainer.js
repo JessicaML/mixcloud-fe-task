@@ -15,35 +15,55 @@ function NotificationContainer({ data }) {
   const [waitingNotifs, setWaitingNotifs] = useState([]);
 
   useEffect(() => {
-    setActiveNotifs(data.data.slice(0, 3))
+    // setActiveNotifs(data.data.slice(0, 3))
     setWaitingNotifs(data.data.slice(3))
+      data.data.forEach(follower => {
+        if (activeNotifs.length < 3) {
+          activeNotifs.push(follower)
+          setActiveNotifs(activeNotifs)
+          setTimeout(() => {
+            setActiveNotifs(removeNotif(follower));
+          }, 5000);  
+        }
+      })
   },[data.data]);
 
 
   const onClick = (follower) => {
-    const list = activeNotifs.filter(notif => notif.key !== follower.key)
-    console.log('waitingNotifs', waitingNotifs)
+    const list = removeNotif(follower)
+    if (waitingNotifs.length > 1 && activeNotifs.length < 3) {
+      setActiveNotifs(addNotif(list));
+      setTimeout(() => {
+        setActiveNotifs(removeNotif(follower));
+      }, 5000);  
 
-    if (waitingNotifs.length > 0) {
-      list.push(waitingNotifs[0])
-      const waiting = waitingNotifs
-      console.log('waiting', waiting)
-      waiting.shift()
-      console.log('waiting', waiting)
-      setWaitingNotifs(waiting)  
+    } else {
+      setActiveNotifs(list);
     }
+  }
 
-    setActiveNotifs(list);
+  const removeNotif = (follower) => {
+    const list = activeNotifs.filter(notif => notif.key !== follower.key)
+    return list;
+  }
+
+  const addNotif = (list) => {
+    const waiting = waitingNotifs
+    waiting.shift()
+    setWaitingNotifs(waiting)
+    list.push(waitingNotifs[0])    
+    return list
   }
 
   return (
     <Container>
-      {activeNotifs.map((follower) =>
-      <Notification 
-        key={follower.key}
-        follower={follower}
-        onClick={onClick}
-      />)}
+      {activeNotifs && activeNotifs.map((follower) =>
+        <Notification 
+          key={follower.key}
+          follower={follower}
+          onClick={onClick}
+        />
+      )}
     </Container>
   );
 }
