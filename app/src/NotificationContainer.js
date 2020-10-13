@@ -25,13 +25,22 @@ function NotificationContainer({ data }) {
      isInitialMount.current = false;  
     } else {
 
-    if (waitingNotifs.length > 0 && waitingNotifs.length < 10) {
+    if (waitingNotifs.length > 3) {
       setInterval(() => {
         console.log('activeNotifs', activeNotifs)
         console.log('waitingNotifs', waitingNotifs)
-
         setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
         setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
+      }, 5000);
+    } else if (waitingNotifs.length > 0) {
+      setTimeout(() => {
+        setActiveNotifs(waitingNotifs)
+        setWaitingNotifs([])
+      }, 5000);
+    } else  {
+      setTimeout(() => {
+        setActiveNotifs([])
+        setWaitingNotifs([])
       }, 5000);
     }
   }
