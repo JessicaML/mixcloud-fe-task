@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Notification from "./Notification";
+import Expire from './Expire'
 
 import "./App.css";
 
@@ -14,10 +15,28 @@ function NotificationContainer({ data }) {
   const [activeNotifs, setActiveNotifs] = useState([]);
   const [waitingNotifs, setWaitingNotifs] = useState([]);
 
+  const isInitialMount = useRef(true);
+  const maxNotifs = 3;
+
   useEffect(() => {
-    setActiveNotifs(data.data.slice(0, 3))
-    setWaitingNotifs(data.data.slice(3))
-  },[data.data]);
+    if (isInitialMount.current) {
+      setActiveNotifs(data.data.slice(0, maxNotifs))
+      setWaitingNotifs(data.data.slice(maxNotifs))  
+     isInitialMount.current = false;  
+    } else {
+
+    if (waitingNotifs.length > 0 && waitingNotifs.length < 10) {
+      setInterval(() => {
+        console.log('activeNotifs', activeNotifs)
+        console.log('waitingNotifs', waitingNotifs)
+
+        setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
+        setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
+      }, 5000);
+    }
+  }
+
+  },[data.data, waitingNotifs, activeNotifs]);
 
 
   const onClick = (follower) => {
@@ -43,15 +62,17 @@ function NotificationContainer({ data }) {
   }
 
   return (
-    <Container>
-      {activeNotifs && activeNotifs.map((follower) =>
-        <Notification 
-          key={follower.key}
-          follower={follower}
-          onClick={onClick}
-        />
-      )}
-    </Container>
+    // <Expire delay={5000}>
+      <Container>
+        {activeNotifs && activeNotifs.map((follower) =>
+          <Notification 
+            key={follower.key}
+            follower={follower}
+            onClick={onClick}
+          />
+        )}
+      </Container>
+    // </Expire>
   );
 }
 
