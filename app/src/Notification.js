@@ -54,7 +54,7 @@ const Text = styled.div`
 
 function Notification({ follower, onClick }) {
   return (
-    <Container className="fade-in">
+    <Container className="fade-in fade-out">
         <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
         <TextWrapper>
           <Name>{follower.name}</Name>
