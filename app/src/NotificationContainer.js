@@ -15,28 +15,15 @@ function NotificationContainer({ data }) {
   const [waitingNotifs, setWaitingNotifs] = useState([]);
 
   useEffect(() => {
-    // setActiveNotifs(data.data.slice(0, 3))
+    setActiveNotifs(data.data.slice(0, 3))
     setWaitingNotifs(data.data.slice(3))
-      data.data.forEach(follower => {
-        if (activeNotifs.length < 3) {
-          activeNotifs.push(follower)
-          setActiveNotifs(activeNotifs)
-          setTimeout(() => {
-            setActiveNotifs(removeNotif(follower));
-          }, 5000);  
-        }
-      })
   },[data.data]);
 
 
   const onClick = (follower) => {
     const list = removeNotif(follower)
-    if (waitingNotifs.length > 1 && activeNotifs.length < 3) {
+    if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
       setActiveNotifs(addNotif(list));
-      setTimeout(() => {
-        setActiveNotifs(removeNotif(follower));
-      }, 5000);  
-
     } else {
       setActiveNotifs(list);
     }
