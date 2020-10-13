@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Notification from "./Notification";
-import Expire from './Expire'
-
 import "./App.css";
 
 const Container = styled.div`
@@ -24,28 +22,23 @@ function NotificationContainer({ data }) {
       setWaitingNotifs(data.data.slice(maxNotifs))  
      isInitialMount.current = false;  
     } else {
-
-    if (waitingNotifs.length > 3) {
-      setInterval(() => {
-        console.log('activeNotifs', activeNotifs)
-        console.log('waitingNotifs', waitingNotifs)
+    if (waitingNotifs.length > 0) {
+      const timer = setTimeout(() => {
         setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
         setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
       }, 5000);
-    } else if (waitingNotifs.length > 0) {
-      setTimeout(() => {
-        setActiveNotifs(waitingNotifs)
-        setWaitingNotifs([])
-      }, 5000);
-    } else  {
-      setTimeout(() => {
-        setActiveNotifs([])
-        setWaitingNotifs([])
-      }, 5000);
-    }
-  }
+      return () => clearTimeout(timer);
+    } else if (activeNotifs.length > 0) {
+        const timer = setTimeout(() => {
+          setActiveNotifs([])
+          setWaitingNotifs([])
+        }, 5000);
+        return () => clearTimeout(timer);
+      } 
+   }
 
-  },[data.data, waitingNotifs, activeNotifs]);
+   // if data updates, add it to the top of waitingNotifs 
+},[data.data, waitingNotifs, activeNotifs]);
 
 
   const onClick = (follower) => {
@@ -63,15 +56,12 @@ function NotificationContainer({ data }) {
   }
 
   const addNotif = (list) => {
-    const waiting = waitingNotifs
-    waiting.shift()
-    setWaitingNotifs(waiting)
+    setWaitingNotifs(waitingNotifs.slice(1))
     list.push(waitingNotifs[0])    
     return list
   }
 
   return (
-    // <Expire delay={5000}>
       <Container>
         {activeNotifs && activeNotifs.map((follower) =>
           <Notification 
@@ -81,7 +71,6 @@ function NotificationContainer({ data }) {
           />
         )}
       </Container>
-    // </Expire>
   );
 }
 
