@@ -5,13 +5,17 @@ import NotificationContainer from "./NotificationContainer";
 
 import "./App.css";
 
+const Colors = {
+    lightGrey: "#E5E5E5",
+  };
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #E5E5E5;
+  background-color: ${Colors.lightGrey};
 `;
 
 function App() {
