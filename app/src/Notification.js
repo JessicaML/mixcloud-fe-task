@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import styled from "styled-components";
 import live from "./assets/live.svg";
 import close from "./assets/close.svg";
 import "./App.css";
@@ -74,10 +75,9 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
-
 function Notification({ follower, onClick, fadeOut }) {
   return (
-    <Container className={classNames(fadeOut || 'fadeIn')}>
+    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn')}>
       <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
       <TextWrapper>
         <Name>{follower.name}</Name>
@@ -88,5 +88,16 @@ function Notification({ follower, onClick, fadeOut }) {
     </Container>
   );
 }
+
+Notification.propTypes = {
+  onClick: PropTypes.func,
+  fadeOut: PropTypes.string,
+  follower: PropTypes.shape({
+    name: PropTypes.string,
+    pictures: PropTypes.shape({
+      thumbnail: PropTypes.string
+    })
+  })
+};
 
 export default Notification;

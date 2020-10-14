@@ -22,7 +22,7 @@
 	  }
 }
 
-.fade0ut  {
+.fadeOut  {
 	opacity: 0;
 	animation-name: fadeOutOpacity;
 	animation-timing-function: ease-out;

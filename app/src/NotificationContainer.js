@@ -26,7 +26,6 @@ function NotificationContainer({ data }) {
     if (waitingNotifs.length > 0) {
       const timer = setTimeout(() => {
         addThreeFadeOutClasses(activeNotifs);
-        
         setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
         setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
       }, 5000);
@@ -68,7 +67,7 @@ function NotificationContainer({ data }) {
   const addFadeOutClass = (follower) => {
     const toBeRemoved = activeNotifs.filter(notif => notif.key === follower.key)
     const freshList = activeNotifs.filter(notif => notif.key !== follower.key)
-    toBeRemoved[0].fadeOut = 'fade0ut';
+    toBeRemoved[0].fadeOut = 'fadeOut';
     freshList.push(toBeRemoved[0])
     setActiveNotifs(freshList)
   }
@@ -76,7 +75,7 @@ function NotificationContainer({ data }) {
   const addThreeFadeOutClasses = (list) => {
     const freshlist = [];
     list.forEach(toBeRemoved => { 
-      toBeRemoved.fadeOut = 'fade0ut'
+      toBeRemoved.fadeOut = 'fadeOut'
       freshlist.push(toBeRemoved)
     });
     console.log(freshlist)
