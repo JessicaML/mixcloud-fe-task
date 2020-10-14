@@ -192,7 +192,7 @@ function App() {
       <h1> Hello World! </h1>
       {data && 
       <NotificationContainer 
-        data={data}
+        data={data.data}
       />}
       {error && console.log(error)}
       {console.log(data)}
