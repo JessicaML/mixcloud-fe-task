@@ -24,33 +24,29 @@ function NotificationContainer({ data }) {
     } else {
     if (waitingNotifs.length > 0) {
       const timer = setTimeout(() => {
+        addThreeFadeOutClasses(activeNotifs);
+        
         setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
         setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
       }, 5000);
       return () => clearTimeout(timer);
     } else if (activeNotifs.length > 0) {
         const timer = setTimeout(() => {
+
+          addThreeFadeOutClasses(activeNotifs);
+
           setActiveNotifs([])
           setWaitingNotifs([])
         }, 5000);
         return () => clearTimeout(timer);
       } 
    }
-
-   // if data updates, add it to the top of waitingNotifs 
 },[data.data, waitingNotifs, activeNotifs]);
-
 
   const onClick = (follower) => {
     const list = removeNotif(follower)
     if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
-      console.log('list', list)
-
-      setTimeout(() => {
-        setActiveNotifs(addNotif(list))
-      }, 250);
-
-     
+      setActiveNotifs(addNotif(list))
     } else {
       setTimeout(()=>setActiveNotifs(list),250);
     }
@@ -72,11 +68,18 @@ function NotificationContainer({ data }) {
     const toBeRemoved = activeNotifs.filter(notif => notif.key === follower.key)
     const freshList = activeNotifs.filter(notif => notif.key !== follower.key)
     toBeRemoved[0].fadeOut = 'fade0ut';
-
-    console.log('toBeRemoved[0]', toBeRemoved[0])
     freshList.push(toBeRemoved[0])
     setActiveNotifs(freshList)
-    // return freshList;
+  }
+
+  const addThreeFadeOutClasses = (list) => {
+    const freshlist = [];
+    list.forEach(toBeRemoved => { 
+      toBeRemoved.fadeOut = 'fade0ut'
+      freshlist.push(toBeRemoved)
+    });
+    console.log(freshlist)
+    setActiveNotifs(freshlist)
   }
 
   return (
