@@ -24,18 +24,24 @@ function NotificationContainer({ data }) {
     if (waitingNotifs.length > 0) {
       const timer = setTimeout(() => {
         addThreeFadeOutClasses(activeNotifs);
-        setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
-        setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
+
+        setTimeout(() => {
+          setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
+          setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
+          }, 250);
+
       }, 5000);
       return () => clearTimeout(timer);
     } else if (activeNotifs.length > 0) {
         const timer = setTimeout(() => {
-
           addThreeFadeOutClasses(activeNotifs);
+          
+          setTimeout(() => {
+            setActiveNotifs([])
+            setWaitingNotifs([])
+            }, 250);
 
-          setActiveNotifs([])
-          setWaitingNotifs([])
-        }, 5000);
+          }, 5000);
         return () => clearTimeout(timer);
       } 
    }
@@ -44,10 +50,14 @@ function NotificationContainer({ data }) {
   const onClick = (follower) => {
     const list = removeNotif(follower)
     if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
-      setActiveNotifs(addNotif(list))
+      setTimeout(()=>setActiveNotifs(addNotif(list),250));
     } else {
-      setActiveNotifs(list);
+      setTimeout(()=>setActiveNotifs(list),250);
     }
+  }
+
+  const removeNotifs = () => {
+    return [];
   }
 
   const removeNotif = (follower) => {
