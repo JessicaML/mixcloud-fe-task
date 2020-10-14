@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, usePrevious } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Notification from "./Notification";
 import "./App.css";
@@ -12,9 +12,7 @@ const Container = styled.div`
 function NotificationContainer({ data }) {
   const [activeNotifs, setActiveNotifs] = useState([]);
   const [waitingNotifs, setWaitingNotifs] = useState([]);
-
   const isInitialMount = useRef(true);
-
   const maxNotifs = 3;
 
   useEffect(() => {
@@ -48,7 +46,7 @@ function NotificationContainer({ data }) {
     if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
       setActiveNotifs(addNotif(list))
     } else {
-      setTimeout(()=>setActiveNotifs(list),250);
+      setActiveNotifs(list);
     }
   }
 
