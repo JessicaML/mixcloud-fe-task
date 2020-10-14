@@ -14,7 +14,6 @@ function NotificationContainer({ data }) {
   const [waitingNotifs, setWaitingNotifs] = useState([]);
 
   const isInitialMount = useRef(true);
-  const previousData = usePrevious(activeNotifs);
 
   const maxNotifs = 3;
 
@@ -24,31 +23,26 @@ function NotificationContainer({ data }) {
       setWaitingNotifs(data.slice(maxNotifs))  
      isInitialMount.current = false;  
     } else {
-  //   if (waitingNotifs.length > 0) {
-  //     const timer = setTimeout(() => {
-  //       addThreeFadeOutClasses(activeNotifs);
+    if (waitingNotifs.length > 0) {
+      const timer = setTimeout(() => {
+        addThreeFadeOutClasses(activeNotifs);
         
-  //       setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
-  //       setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
-  //     }, 5000);
-  //     return () => clearTimeout(timer);
-  //   } else if (activeNotifs.length > 0) {
-  //       const timer = setTimeout(() => {
+        setActiveNotifs(waitingNotifs.slice(0, maxNotifs))
+        setWaitingNotifs(waitingNotifs.slice(maxNotifs))  
+      }, 5000);
+      return () => clearTimeout(timer);
+    } else if (activeNotifs.length > 0) {
+        const timer = setTimeout(() => {
 
-  //         addThreeFadeOutClasses(activeNotifs);
+          addThreeFadeOutClasses(activeNotifs);
 
-  //         setActiveNotifs([])
-  //         setWaitingNotifs([])
-  //       }, 5000);
-  //       return () => clearTimeout(timer);
-  //     } 
+          setActiveNotifs([])
+          setWaitingNotifs([])
+        }, 5000);
+        return () => clearTimeout(timer);
+      } 
    }
-   if (previousData !== data) {
-    const newFollowers = data.filter(e => !previousData.includes(e))
-    waitingNotifs.unshift(newFollowers);
-    setWaitingNotifs(waitingNotifs);
-   }
-},[data, previousData, waitingNotifs, activeNotifs]);
+},[data, waitingNotifs, activeNotifs]);
 
   const onClick = (follower) => {
     const list = removeNotif(follower)
