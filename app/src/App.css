@@ -1,12 +1,11 @@
 /** add css here if you would like to use css **/
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
-.fade-in {
+.fadeIn {
 	opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-timing-function: ease-in;
 	animation-duration: 250ms;
-	/* top: 0; */
 }
 
 @keyframes fadeInOpacity {
@@ -23,15 +22,14 @@
 	  }
 }
 
-/* .fade-out {
-	opacity: 1;
+.fade0ut  {
+	opacity: 0;
 	animation-name: fadeOutOpacity;
-	animation-timing-function: ease-in;
+	animation-timing-function: ease-out;
 	animation-duration: 250ms;
-	/* top: 0; */
-/* } */
+}
 
-/* @keyframes fadeOutOpacity {
+@keyframes fadeOutOpacity {
 	0% {
 		opacity: 1;
 		-webkit-transform: none;
@@ -43,4 +41,4 @@
 		-webkit-transform: translate3d(0, -10px, 0);
 				transform: translate3d(0, -10px, 0);
 		}
-} */
+}

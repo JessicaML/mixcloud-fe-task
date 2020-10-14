@@ -44,13 +44,20 @@ function NotificationContainer({ data }) {
   const onClick = (follower) => {
     const list = removeNotif(follower)
     if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
-      setActiveNotifs(addNotif(list));
+      console.log('list', list)
+
+      setTimeout(() => {
+        setActiveNotifs(addNotif(list))
+      }, 250);
+
+     
     } else {
-      setActiveNotifs(list);
+      setTimeout(()=>setActiveNotifs(list),250);
     }
   }
 
   const removeNotif = (follower) => {
+    addFadeOutClass(follower)
     const list = activeNotifs.filter(notif => notif.key !== follower.key)
     return list;
   }
@@ -61,14 +68,32 @@ function NotificationContainer({ data }) {
     return list
   }
 
+  const addFadeOutClass = (follower) => {
+    const toBeRemoved = activeNotifs.filter(notif => notif.key === follower.key)
+    const freshList = activeNotifs.filter(notif => notif.key !== follower.key)
+    toBeRemoved[0].fadeOut = 'fade0ut';
+
+    console.log('toBeRemoved[0]', toBeRemoved[0])
+    freshList.push(toBeRemoved[0])
+    setActiveNotifs(freshList)
+    // return freshList;
+  }
+
   return (
       <Container>
-        {activeNotifs && activeNotifs.map((follower) =>
-          <Notification 
-            key={follower.key}
-            follower={follower}
-            onClick={onClick}
-          />
+        {activeNotifs && activeNotifs.map((follower) => {
+          console.log(follower.fadeOut)
+          return (
+            <Notification
+              fadeOut={follower.fadeOut}
+              key={follower.key}
+              follower={follower}
+              onClick={onClick}
+            />
+          )
+        }
+          
+          
         )}
       </Container>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import classNames from 'classnames';
 import live from "./assets/live.svg";
 import close from "./assets/close.svg";
 import "./App.css";
@@ -52,9 +53,10 @@ const Text = styled.div`
 `;
 
 
-function Notification({ follower, onClick }) {
+function Notification({ follower, onClick, fadeOut }) {
   return (
-    <Container className="fade-in fade-out">
+    <Container className={classNames(fadeOut || 'fadeIn')}>
+
         <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
         <TextWrapper>
           <Name>{follower.name}</Name>
