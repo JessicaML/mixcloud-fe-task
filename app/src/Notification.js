@@ -1,27 +1,27 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styled from "styled-components";
-import live from "./assets/live.svg";
-import close from "./assets/close.svg";
-import "./App.css";
+import styled from 'styled-components';
+import live from './assets/live.svg';
+import close from './assets/close.svg';
+import './App.css';
 
 const Colors = {
-  white: "#FFFFFF",
-  almostBlack: "#1E2337",
-  grey: "#636674",
+  white: '#FFFFFF',
+  almostBlack: '#1E2337',
+  grey: '#636674',
 };
 
 const FontSizes = {
-  small: "12.25px",
-  medium: "15.75px",
+  small: '12.25px',
+  medium: '15.75px',
 };
 
 const Spaces = {
-  extraSmall: "4px",
-  small: "8px",
-  medium: "12px",
-  large: "16px"
+  extraSmall: '4px',
+  small: '8px',
+  medium: '12px',
+  large: '16px',
 };
 
 const Container = styled.div`
@@ -29,7 +29,7 @@ const Container = styled.div`
   align-items: center;  
   width: 350px;
   height: 60px;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   border-radius: 4px;
   background-color: ${Colors.white};
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05), 0px 0px 2px rgba(0, 0, 0, 0.3), 0px 3px 6px rgba(0, 0, 0, 0.2);
@@ -75,15 +75,15 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
-function Notification({ follower, onClick, fadeOut, slideUp }) {
+function Notification({ follower, onClick, fadeOut }) {
   return (
-    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn', slideUp)}>
-      <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
+    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn')}>
+      <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail} />
       <TextWrapper>
         <Name>{follower.name}</Name>
         <Text>is following you</Text>
       </TextWrapper>
-      <Logo src={live} alt={live}/>
+      <Logo src={live} alt={live} />
       <Close src={close} alt={close} onClick={() => onClick(follower)} />
     </Container>
   );
@@ -95,9 +95,9 @@ Notification.propTypes = {
   follower: PropTypes.shape({
     name: PropTypes.string,
     pictures: PropTypes.shape({
-      thumbnail: PropTypes.string
-    })
-  })
+      thumbnail: PropTypes.string,
+    }),
+  }),
 };
 
 export default Notification;

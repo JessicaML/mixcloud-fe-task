@@ -1,16 +1,18 @@
+export const fetchData = (url, onSuccess, onError) => {
+  const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
 
-
-export const  fetchData = (url, onSuccess, onError) => {
-    var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-    targetUrl = url
-
-    fetch(proxyUrl + targetUrl).then((response) => {
-        if (response.ok) return response.json();
-    })
+  fetch(proxyUrl).then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    return onError('error');
+  })
     .then((responseJson) => {
-        onSuccess(responseJson)
+      onSuccess(responseJson);
     })
     .catch((error) => {
-        onError(error)
+      onError(error);
     });
-}
+};
+
+export default fetchData;

@@ -6,16 +6,16 @@ const props = {
   follower: {
     name: 'follower-name',
     pictures: {
-      thumbnail: 'img-name'
-    }
-  }
+      thumbnail: 'img-name',
+    },
+  },
 };
 
 describe('Notification', () => {
   it('displays follower name', () => {
     render(<Notification {...props} />);
 
-    expect(screen.getAllByText('follower-name')).toHaveLength(1)
+    expect(screen.getAllByText('follower-name')).toHaveLength(1);
   });
 
   it('renders with the fadeIn className', () => {
@@ -27,7 +27,7 @@ describe('Notification', () => {
 
 describe('if fadeOut is set', () => {
   it('adds the fadeOut className', () => {
-    render(<Notification {...props} fadeOut="fadeOut"/>);
+    render(<Notification {...props} fadeOut="fadeOut" />);
 
     expect(screen.getAllByTestId('Container')[0]).toHaveClass('fadeOut');
     expect(screen.getAllByTestId('Container')[0]).not.toHaveClass('fadeIn');

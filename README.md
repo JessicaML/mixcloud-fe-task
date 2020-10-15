@@ -15,6 +15,7 @@ Growl notifications typically pop up in a corner of the screen and are displayed
 They stack until a given amount of notifications is shown. When the oldest one at the top is no longer displayed for whichever reason, the next one is displayed at the bottom of the stack and so forth, until there are no notifications left.
 
 For the purpose of this exercise we are assuming all of these notifications are live and available when the user first loads the page.
+
 We are also not concerned with browser compatibility; recent versions of Chrome and Firefox are fine.
 
 ### Endpoint
