@@ -56,10 +56,6 @@ function NotificationContainer({ data }) {
     }
   }
 
-  const removeNotifs = () => {
-    return [];
-  }
-
   const removeNotif = (follower) => {
     addFadeOutClass(follower)
     const list = activeNotifs.filter(notif => notif.key !== follower.key)
@@ -68,13 +64,29 @@ function NotificationContainer({ data }) {
 
   const addNotif = (list) => {
     setWaitingNotifs(waitingNotifs.slice(1))
-    list.push(waitingNotifs[0])    
+
+    let toBeAdded = waitingNotifs[0]
+    list.push(toBeAdded)    
+
+    setTimeout(function() {
+      list.pop()   
+      toBeAdded.show = 'show'
+      list.push(toBeAdded)    
+    }, 10);
+    
     return list
   }
 
   const addFadeOutClass = (follower) => {
     const toBeRemoved = activeNotifs.filter(notif => notif.key === follower.key)
-    const freshList = activeNotifs.filter(notif => notif.key !== follower.key)
+    const filteredList = activeNotifs.filter(notif => notif.key !== follower.key)
+
+    const freshList = []; 
+    
+    filteredList.forEach(toSlideUp => { 
+      toSlideUp.slideUp = 'slideUp'
+      freshList.push(toSlideUp)
+    });
     toBeRemoved[0].fadeOut = 'fadeOut';
     freshList.push(toBeRemoved[0])
     setActiveNotifs(freshList)
@@ -92,11 +104,13 @@ function NotificationContainer({ data }) {
 
   return (
       <Container>
+      {console.log('activeNotifs', activeNotifs)}
         {activeNotifs && activeNotifs.map((follower) => {
-          console.log(follower.fadeOut)
+          console.log('follower.slideUp', follower.slideUp)
           return (
             <Notification
               fadeOut={follower.fadeOut}
+              slideUp={follower.slideUp}
               key={follower.key}
               follower={follower}
               onClick={onClick}

@@ -75,9 +75,9 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
-function Notification({ follower, onClick, fadeOut }) {
+function Notification({ follower, onClick, fadeOut, slideUp }) {
   return (
-    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn')}>
+    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn', slideUp)}>
       <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail}/>
       <TextWrapper>
         <Name>{follower.name}</Name>
