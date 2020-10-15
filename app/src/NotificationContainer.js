@@ -88,6 +88,7 @@ function NotificationContainer({ data }) {
       freshList.push(toSlideUp)
     });
     toBeRemoved[0].fadeOut = 'fadeOut';
+    console.log('toBeRemoved[0]', toBeRemoved[0])
     freshList.push(toBeRemoved[0])
     setActiveNotifs(freshList)
   }
@@ -98,15 +99,12 @@ function NotificationContainer({ data }) {
       toBeRemoved.fadeOut = 'fadeOut'
       freshlist.push(toBeRemoved)
     });
-    console.log(freshlist)
     setActiveNotifs(freshlist)
   }
 
   return (
       <Container>
-      {console.log('activeNotifs', activeNotifs)}
         {activeNotifs && activeNotifs.map((follower) => {
-          console.log('follower.slideUp', follower.slideUp)
           return (
             <Notification
               fadeOut={follower.fadeOut}

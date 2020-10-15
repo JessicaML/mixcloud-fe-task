@@ -1,7 +1,7 @@
 /** add css here if you would like to use css **/
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
-.slideUp {
+/* .slideUp {
 	background-color: blue;
     animation: move 1s ease-in-out;
 }
@@ -9,7 +9,7 @@
 @keyframes move {
     0% {margin-top: 60px;}
    100% {margin-top: 0px;}
-}
+} */
 
 .fadeIn {
 	opacity: 1;
@@ -22,15 +22,14 @@
 @keyframes fadeInOpacity {
 	0% {
 		opacity: 0;
+		/* height: 0; */
 		transform: translate3d(0, 10px, 0);
-		margin-top: 42px;
-			 
 	}
 	
 	100% {
 		opacity: 1;
+		/* height: 60px; */
 		transform: none;
-		margin-top: 2px;
 	}
 }
 
@@ -45,14 +44,14 @@
 @keyframes fadeOutOpacity {
 	0% {
 		opacity: 1;
-		-webkit-transform: none;
-				transform: none;
+		height: 60px;
+		transform: none;
 		}
 
 	100% {
 		opacity: 0;
-		-webkit-transform: translate3d(0, -10px, 0);
-				transform: translate3d(0, -10px, 0);
+		height: 0;
+		transform: translate3d(0, -10px, 0);
 		}
 }
 
