@@ -40,8 +40,7 @@
 }
 
 .slideUp  {
-	transform-origin: top;
-	overflow: hidden;
+	overflow: hidden; 
 	opacity: 0;
 	animation-name: slideUp;
 	animation-timing-function: ease-out;
@@ -53,7 +52,6 @@
 		height: 60px;
 		opacity: 1;
 		transform: translateY(0);
-
 		}
 
 	100% {
