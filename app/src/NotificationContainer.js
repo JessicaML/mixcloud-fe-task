@@ -59,7 +59,7 @@ function NotificationContainer({ data }) {
 
     activeNotifs.forEach((notif) => {
       if (notif.key === follower.key) {
-        notif.fadeOut = 'fadeOut';
+        notif.slideUp = 'slideUp';
       }
       newList.push(notif);
     });
@@ -116,6 +116,7 @@ function NotificationContainer({ data }) {
         return (
           <Notification
             fadeOut={follower.fadeOut}
+            slideUp={follower.slideUp}
             key={follower.key}
             follower={follower}
             onClick={onClick}

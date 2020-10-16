@@ -75,23 +75,32 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
-function Notification({ follower, onClick, fadeOut }) {
+function Notification({
+  follower,
+  onClick,
+  fadeOut,
+  slideUp,
+}) {
   return (
-    <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn')}>
-      <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail} />
-      <TextWrapper>
-        <Name>{follower.name}</Name>
-        <Text>is following you</Text>
-      </TextWrapper>
-      <Logo src={live} alt={live} />
-      <Close src={close} alt={close} onClick={() => onClick(follower)} />
-    </Container>
+    <div className={slideUp}>
+      {console.log(slideUp)}
+      <Container data-testid="Container" className={classNames(fadeOut || 'fadeIn')}>
+        <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail} />
+        <TextWrapper>
+          <Name>{follower.name}</Name>
+          <Text>is following you</Text>
+        </TextWrapper>
+        <Logo src={live} alt={live} />
+        <Close src={close} alt={close} onClick={() => onClick(follower)} />
+      </Container>
+    </div>
   );
 }
 
 Notification.propTypes = {
   onClick: PropTypes.func,
   fadeOut: PropTypes.string,
+  slideUp: PropTypes.string,
   follower: PropTypes.shape({
     name: PropTypes.string,
     pictures: PropTypes.shape({
