@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { fetchData } from './fetchData';
+import { fetchData } from './services/fetchData';
 import NotificationContainer from './NotificationContainer';
 import './App.css';
 

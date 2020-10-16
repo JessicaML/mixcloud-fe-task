@@ -31,5 +31,16 @@ describe('if fadeOut is set', () => {
 
     expect(screen.getAllByTestId('Container')[0]).toHaveClass('fadeOut');
     expect(screen.getAllByTestId('Container')[0]).not.toHaveClass('fadeIn');
+    expect(screen.getAllByTestId('Container')[0]).not.toHaveClass('slideUp');
+  });
+});
+
+describe('if slideUp is set', () => {
+  it('adds the slideUp className', () => {
+    render(<Notification {...props} slideUp="slideUp" />);
+
+    expect(screen.getAllByTestId('Container')[0]).toHaveClass('slideUp');
+    expect(screen.getAllByTestId('Container')[0]).not.toHaveClass('fadeIn');
+    expect(screen.getAllByTestId('Container')[0]).not.toHaveClass('fadeOut');
   });
 });

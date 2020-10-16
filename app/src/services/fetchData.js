@@ -1,4 +1,4 @@
-export const fetchData = (url, onSuccess, onError) => {
+const fetchData = (url, onSuccess, onError) => {
   const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
 
   fetch(proxyUrl).then((response) => {

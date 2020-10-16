@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
+import removeOrReplaceNotif from './utils/slideUp';
 import Notification from './Notification';
 import './App.css';
 
@@ -16,6 +16,15 @@ function NotificationContainer({ data }) {
   const [waitingNotifs, setWaitingNotifs] = useState([]);
   const isInitialMount = useRef(true);
   const maxNotifs = 3;
+
+  const addThreeFadeOutClasses = (list) => {
+    const freshlist = [];
+    list.forEach((toBeRemoved) => {
+      toBeRemoved.fadeOut = 'fadeOut';
+      freshlist.push(toBeRemoved);
+    });
+    setActiveNotifs(freshlist);
+  };
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -47,67 +56,9 @@ function NotificationContainer({ data }) {
     }
   }, [data, waitingNotifs, activeNotifs]);
 
-
-  const addNotif = (list) => {
-    setWaitingNotifs(waitingNotifs.slice(1));
-    list.push(waitingNotifs[0]);
-    return list;
-  };
-
-  const addFadeOutClass = (follower) => {
-    const newList = [];
-
-    activeNotifs.forEach((notif) => {
-      if (notif.key === follower.key) {
-        notif.slideUp = 'slideUp';
-      }
-      newList.push(notif);
-    });
-
-    console.log('newList', newList);
-
-
-    setActiveNotifs(newList);
-
-    // const toBeRemoved = activeNotifs.filter((notif) => notif.key === follower.key);
-    // const freshList = activeNotifs.filter((notif) => notif.key !== follower.key);
-    // toBeRemoved[0].fadeOut = 'fadeOut';
-    // console.log('toBeRemoved[0]', toBeRemoved[0]);
-    // freshList.push(toBeRemoved[0]);
-    // setActiveNotifs(freshList);
-  };
-
-  const addThreeFadeOutClasses = (list) => {
-    const freshlist = [];
-    list.forEach((toBeRemoved) => {
-      toBeRemoved.fadeOut = 'fadeOut';
-      freshlist.push(toBeRemoved);
-    });
-    setActiveNotifs(freshlist);
-  };
-
-  const removeNotif = (follower) => {
-    addFadeOutClass(follower);
-    const list = activeNotifs.filter((notif) => notif.key !== follower.key);
-    return list;
-  };
-
   const onClick = (follower) => {
-    const list = removeNotif(follower);
-    if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
-      setTimeout(() => {
-        setActiveNotifs(addNotif(list));
-      }, 250);
-    } else {
-      setTimeout(() => {
-        setActiveNotifs(list);
-      }, 250);
-    }
+    removeOrReplaceNotif(follower, activeNotifs, waitingNotifs, setActiveNotifs, setWaitingNotifs);
   };
-
-  const removeNotifs = () => {
-    return [];
-  }
 
   return (
     <Container>
