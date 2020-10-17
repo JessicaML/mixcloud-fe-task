@@ -1,3 +1,5 @@
+See app/README.md for response info.
+
 # Mixcloud Coding Challenge
 
 This folder contains a layout focussed coding challenge.

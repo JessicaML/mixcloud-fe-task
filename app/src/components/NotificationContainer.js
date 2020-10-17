@@ -42,7 +42,8 @@ function NotificationContainer({ data }) {
           }, 250);
         }, 5000);
         return () => clearTimeout(timer);
-      } else if (activeNotifs.length > 0) {
+      }
+      if (activeNotifs.length > 0) {
         const timer = setTimeout(() => {
           addThreeFadeOutClasses(activeNotifs);
           setTimeout(() => {
@@ -60,18 +61,15 @@ function NotificationContainer({ data }) {
 
   return (
     <Container>
-      {activeNotifs && activeNotifs.map((follower) => {
-        console.log(follower.fadeOut);
-        return (
-          <Notification
-            fadeOut={follower.fadeOut}
-            slideUp={follower.slideUp}
-            key={follower.key}
-            follower={follower}
-            onClick={onClick}
-          />
-        );
-      })}
+      {activeNotifs && activeNotifs.map((follower) => (
+        <Notification
+          fadeOut={follower.fadeOut}
+          slideUp={follower.slideUp}
+          key={follower.key}
+          follower={follower}
+          onClick={onClick}
+        />
+      ))}
     </Container>
   );
 }
