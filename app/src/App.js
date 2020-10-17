@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { fetchData } from './services/fetchData';
-import NotificationContainer from './NotificationContainer';
+import NotificationContainer from './components/NotificationContainer';
 import './App.css';
 
 const Colors = {

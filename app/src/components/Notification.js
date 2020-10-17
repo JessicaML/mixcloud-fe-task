@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styled from 'styled-components';
-import live from './assets/live.svg';
-import close from './assets/close.svg';
-import './App.css';
+import live from '../assets/live.svg';
+import close from '../assets/close.svg';
+import '../App.css';
 
 const Colors = {
   white: '#FFFFFF',
@@ -37,11 +37,12 @@ const Container = styled.div`
   margin: ${Spaces.large};
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled.a`
   display: flex;
   flex-direction: column;
   width: 196px;
   margin: ${Spaces.extraSmall};
+  text-decoration: none;
 `;
 
 const ProfileImage = styled.img`
@@ -75,6 +76,8 @@ const Text = styled.div`
   text-overflow: ellipsis;
 `;
 
+const baseUrl = 'http://localhost:3000/';
+
 function Notification({
   follower,
   onClick,
@@ -84,7 +87,7 @@ function Notification({
   return (
     <Container data-testid="Container" className={classNames(fadeOut || slideUp || 'fadeIn')}>
       <ProfileImage src={follower.pictures.thumbnail} alt={follower.pictures.thumbnail} />
-      <TextWrapper>
+      <TextWrapper href={`${baseUrl}live/${follower.username}`}>
         <Name>{follower.name}</Name>
         <Text>is following you</Text>
       </TextWrapper>
@@ -100,6 +103,7 @@ Notification.propTypes = {
   slideUp: PropTypes.string,
   follower: PropTypes.shape({
     name: PropTypes.string,
+    username: PropTypes.string,
     pictures: PropTypes.shape({
       thumbnail: PropTypes.string,
     }),

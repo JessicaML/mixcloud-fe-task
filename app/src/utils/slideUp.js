@@ -29,7 +29,7 @@ const removeOrReplaceNotif = (
   setWaitingNotifs,
 ) => {
   const list = removeNotif(follower, activeNotifs, setActiveNotifs);
-  if (waitingNotifs.length > 1 && activeNotifs.length < 4) {
+  if (waitingNotifs.length > 1) {
     setTimeout(() => {
       setActiveNotifs(addNotif(list, waitingNotifs, setWaitingNotifs));
     }, 250);

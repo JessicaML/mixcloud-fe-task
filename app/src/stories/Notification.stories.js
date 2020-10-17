@@ -1,5 +1,5 @@
 import React from 'react';
-import Notification from '../Notification';
+import Notification from '../components/Notification';
 
 // This default export determines where your story goes in the story list
 export default {

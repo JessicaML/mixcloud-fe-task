@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import removeOrReplaceNotif from './utils/slideUp';
+import removeOrReplaceNotif from '../utils/slideUp';
 import Notification from './Notification';
-import './App.css';
+import '../App.css';
 
 const Container = styled.div`
   position: absolute;
@@ -42,13 +42,11 @@ function NotificationContainer({ data }) {
           }, 250);
         }, 5000);
         return () => clearTimeout(timer);
-      }
-      if (activeNotifs.length > 0) {
+      } else if (activeNotifs.length > 0) {
         const timer = setTimeout(() => {
           addThreeFadeOutClasses(activeNotifs);
           setTimeout(() => {
             setActiveNotifs([]);
-            setWaitingNotifs([]);
           }, 250);
         }, 5000);
         return () => clearTimeout(timer);
