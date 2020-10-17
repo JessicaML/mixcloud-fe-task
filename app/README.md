@@ -13,7 +13,7 @@
 Please find a video demo the the root directory. 
 
 - Adds storybook to build the component.
-- Fetches the new followers from the API provideded. 
+- Fetches the new followers from the API provided. 
 - Pass the followers data to the NotificationContainer component. 
 
 - On page mount, save the first 3 followers to `activeNotifs` and the rest to `waitingNotifs`.
@@ -24,7 +24,7 @@ Please find a video demo the the root directory.
 
 - Map over each follower and pass to Notification.
 
-- Adds an onClick handler to the close button of each notificaiton.
+- Adds an onClick handler to the close button of each notification.
 
 - The onClick calls a removeOrReplaceNotif utils function which:
 1. adds the slideUp class to the notification (animates height to 0 so that notifications below appear to 'slide up').
@@ -36,11 +36,11 @@ Please find a video demo the the root directory.
 
 ## What I would add with more time:
 
-- Use msw and SetUpServer from React Testing Library to mock and test the fetch. 
+- There is still a slight glitch in the animation when a user clicks away a notification. I would try to make this animation smoother. 
 - Move logic from NotificationsContainer into a utils file.
 - Test all the utils functions. 
 - Add a test for NotificationsContainer. 
 - Use msw and SetUpServer from React Testing Library to mock and test the fetch. 
-- There is still a slight glitch in the animation when a user clicks away a notification. I would try to make this animation smoother. 
 - Add a setInterval to the API fetch to ensure that new notifications are displayed in the browser. I would add these notification the the start of the waitingNotifications array if the data prop changes in NotificationsContainer. 
 - Experiment with some libraries, e.g. ReactTransitionGroup/CSSTransitionGroup. 
+
