@@ -24,10 +24,13 @@ const Spaces = {
   large: '16px',
 };
 
+const ScreenWidth = {
+  mobile: '350px',
+};
+
 const Container = styled.div`
   display: flex;
   align-items: center;  
-  width: 350px;
   height: 60px;
   font-family: 'DM Sans', sans-serif;
   border-radius: 4px;
@@ -35,14 +38,18 @@ const Container = styled.div`
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05), 0px 0px 2px rgba(0, 0, 0, 0.3), 0px 3px 6px rgba(0, 0, 0, 0.2);
   padding: ${Spaces.extraSmall};
   margin: ${Spaces.large};
+  width: 350px;
 `;
 
 const TextWrapper = styled.a`
   display: flex;
   flex-direction: column;
-  width: 196px;
   margin: ${Spaces.extraSmall};
   text-decoration: none;
+  width: 80px;
+  @media screen and (min-width: ${ScreenWidth.mobile}) {
+    width: 196px;
+  }
 `;
 
 const ProfileImage = styled.img`

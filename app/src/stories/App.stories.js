@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../App';
+import App from '../components/App';
 
 // This default export determines where your story goes in the story list
 export default {
@@ -9,4 +9,4 @@ export default {
 
 const Template = (args) => <App />;
 
-export const FirstStory = Template.bind({});
+export const AppStory = Template.bind({});

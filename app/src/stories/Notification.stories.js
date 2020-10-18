@@ -9,9 +9,9 @@ export default {
 
 const Template = (args) => <Notification {...args} />;
 
-export const FirstStory = Template.bind({});
+export const NotificationStory = Template.bind({});
 
-FirstStory.args = {
+NotificationStory.args = {
   follower : {
       key: "/cloud_atlas/",
       name: "Cloud Atlas",

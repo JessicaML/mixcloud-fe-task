@@ -40,7 +40,6 @@ Please find a video demo the the root directory.
 - Move logic from NotificationsContainer into a utils file.
 - Test all the utils functions. 
 - Add a test for NotificationsContainer. 
-- Use msw and SetUpServer from React Testing Library to mock and test the fetch. 
-- Add a setInterval to the API fetch to ensure that new notifications are displayed in the browser. I would add these notification the the start of the waitingNotifications array if the data prop changes in NotificationsContainer. 
+- Test the API fetch. 
 - Experiment with some libraries, e.g. ReactTransitionGroup/CSSTransitionGroup. 
 

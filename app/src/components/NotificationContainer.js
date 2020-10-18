@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import removeOrReplaceNotif from '../utils/slideUp';
+import removeOrReplaceNotif from '../services/slideUp';
 import Notification from './Notification';
 import '../App.css';
 
@@ -27,6 +27,7 @@ function NotificationContainer({ data }) {
   };
 
   useEffect(() => {
+    console.log('data', data)
     if (isInitialMount.current) {
       setActiveNotifs(data.slice(0, maxNotifs));
       setWaitingNotifs(data.slice(maxNotifs));
@@ -75,7 +76,10 @@ function NotificationContainer({ data }) {
 }
 
 NotificationContainer.propTypes = {
-  data: PropTypes.shape({}),
-};
+  data: PropTypes.arrayOf(
+    PropTypes.object
+)};
+
+
 
 export default NotificationContainer;
